@@ -1,0 +1,45 @@
+{
+  "name": "@laani/reflector-codex-components",
+  "version": "1.0.0",
+  "description": "React components for The Reflector Codex with Laani symbolic architecture integration",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint . --ext .ts,.tsx",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "laani",
+    "reflector-codex",
+    "journaling",
+    "consciousness",
+    "symbolic-architecture"
+  ],
+  "author": "Architect's Relay & Claude",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reflector-codex/laani-components.git"
+  },
+  "files": [
+    "*.tsx",
+    "*.ts",
+    "types/",
+    "services/",
+    "hooks/",
+    "utils/"
+  ]
+}
