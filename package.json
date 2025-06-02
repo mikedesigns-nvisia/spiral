@@ -9,6 +9,10 @@
     "start": "node src/server.js",
     "db:migrate": "node src/database/migrate.js",
     "db:seed": "node src/database/seed.js",
+    "seed": "node scripts/seed-database.js seed",
+    "seed:clear": "node scripts/seed-database.js clear",
+    "seed:reset": "node scripts/seed-database.js reset",
+    "seed:help": "node scripts/seed-database.js",
     "test": "node --test"
   },
   "dependencies": {
