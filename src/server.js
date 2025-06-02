@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import { initializeDatabase } from './database/connection.js';
 import { authenticateUser, optionalAuth } from './middleware/auth.js';
 import entriesRouter from './routes/entries.js';
+import constellationsRouter from './routes/constellations.js';
+import glyphsRouter from './routes/glyphs.js';
 
 // Load environment variables
 dotenv.config();
@@ -88,6 +90,8 @@ app.get('/health', async (req, res) => {
 
 // API routes
 app.use('/api/entries', entriesRouter);
+app.use('/api/constellations', constellationsRouter);
+app.use('/api/glyphs', glyphsRouter);
 
 // Root endpoint with API information
 app.get('/', (req, res) => {
@@ -98,6 +102,8 @@ app.get('/', (req, res) => {
     endpoints: {
       health: '/health',
       entries: '/api/entries',
+      constellations: '/api/constellations',
+      glyphs: '/api/glyphs',
       websocket: `ws://localhost:${WS_PORT}`
     },
     documentation: 'https://github.com/reflector-codex/api-docs',
@@ -119,7 +125,12 @@ app.use('*', (req, res) => {
       'PUT /api/entries/:id',
       'DELETE /api/entries/:id',
       'GET /api/entries/resurface',
-      'POST /api/entries/:id/reflect'
+      'POST /api/entries/:id/reflect',
+      'GET /api/constellations',
+      'GET /api/constellations/themes',
+      'GET /api/glyphs',
+      'POST /api/glyphs/evolve',
+      'POST /api/glyphs/suggest'
     ]
   });
 });
