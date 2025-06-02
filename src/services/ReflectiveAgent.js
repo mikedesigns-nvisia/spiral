@@ -1,11 +1,25 @@
 import OpenAI from 'openai';
 import { supabaseAdmin } from '../database/connection.js';
+import MockOpenAI from '../mock/mock-openai.js';
 
 export class ReflectiveAgent {
   constructor() {
-    this.openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
+    // Check if we should use mock mode
+    const shouldUseMockMode = (
+      !process.env.OPENAI_API_KEY || 
+      process.env.OPENAI_API_KEY.includes('your_openai') ||
+      process.env.NODE_ENV === 'mock'
+    );
+    
+    if (shouldUseMockMode) {
+      this.openai = new MockOpenAI();
+      this.isMockMode = true;
+    } else {
+      this.openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
+      });
+      this.isMockMode = false;
+    }
     
     this.maxEmbeddingBatchSize = parseInt(process.env.MAX_EMBEDDING_BATCH_SIZE) || 100;
     this.memoryResurfacingLimit = parseInt(process.env.MEMORY_RESURFACING_LIMIT) || 10;
