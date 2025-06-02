@@ -1,0 +1,39 @@
+{
+  "name": "reflector-codex-backend",
+  "version": "1.0.0",
+  "description": "Backend infrastructure for The Reflector Codex - A recursive journaling application with Laani symbolic architecture",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "db:migrate": "node src/database/migrate.js",
+    "db:seed": "node src/database/seed.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "@supabase/supabase-js": "^2.39.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "openai": "^4.26.0",
+    "ws": "^8.16.0",
+    "helmet": "^7.1.0",
+    "rate-limiter-flexible": "^2.4.2",
+    "uuid": "^9.0.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  },
+  "keywords": [
+    "journaling",
+    "reflection",
+    "ai",
+    "recursive",
+    "laani",
+    "consciousness"
+  ],
+  "author": "Architect's Relay & Claude",
+  "license": "MIT"
+}
