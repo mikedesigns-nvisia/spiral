@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Sacred Journal - Mobile Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Sacred Geometry Mobile Animations */
+        @keyframes spiralMobile {
+            0% { transform: rotate(0deg) scale(0.8); }
+            50% { transform: rotate(180deg) scale(1); }
+            100% { transform: rotate(360deg) scale(0.8); }
+        }
+        
+        @keyframes breatheMobile {
+            0%, 100% { opacity: 0.7; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        
+        @keyframes floatMobile {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @keyframes pulseSacred {
+            0%, 100% { box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(139, 92, 246, 0.6); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        @keyframes constellation {
+            0% { opacity: 0.3; transform: rotate(0deg); }
+            50% { opacity: 0.8; transform: rotate(180deg); }
+            100% { opacity: 0.3; transform: rotate(360deg); }
+        }
+        
+        @keyframes ambientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes textShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .animate-spiral-mobile { animation: spiralMobile 4s ease-in-out infinite; }
+        .animate-breathe-mobile { animation: breatheMobile 3s ease-in-out infinite; }
+        .animate-float-mobile { animation: floatMobile 2s ease-in-out infinite; }
+        .animate-pulse-sacred { animation: pulseSacred 2s ease-in-out infinite; }
+        .animate-constellation { animation: constellation 6s linear infinite; }
+        
+        /* Mobile-Optimized Background */
+        .mobile-ambient-bg {
+            background: linear-gradient(135deg, 
+                #667eea 0%, 
+                #764ba2 20%, 
+                #667eea 40%, 
+                #f093fb 60%, 
+                #f5576c 80%, 
+                #4facfe 100%);
+            background-size: 300% 300%;
+            animation: ambientFlow 12s ease infinite;
+        }
+        
+        /* Mobile Glassmorphism */
+        .mobile-glass {
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        
+        .mobile-glass-dark {
+            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Touch-Optimized Interactive Elements */
+        .mobile-interactive {
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+        }
+        
+        .mobile-interactive:active {
+            transform: scale(0.98);
+            opacity: 0.8;
+        }
+        
+        .mobile-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Sacred Text Effects */
+        .sacred-text {
+            background: linear-gradient(45deg, #8b5cf6, #3b82f6, #06b6d4, #10b981);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShimmer 4s ease-in-out infinite;
+        }
+        
+        /* Custom Mobile Scrollbar */
+        .mobile-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .mobile-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+        
+        .mobile-scroll::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #8b5cf6, #3b82f6);
+            border-radius: 2px;
+        }
+        
+        /* Glyph Evolution Animation */
+        .glyph-evolve {
+            animation: spiralMobile 3s ease-in-out infinite;
+        }
+        
+        /* Memory Connection Lines */
+        .connection-pulse {
+            animation: pulseSacred 1.5s ease-in-out infinite;
+        }
+        
+        /* Mobile-Safe Font Sizes */
+        .mobile-text-xs { font-size: 0.75rem; line-height: 1rem; }
+        .mobile-text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+        .mobile-text-base { font-size: 1rem; line-height: 1.5rem; }
+        .mobile-text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+        .mobile-text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .mobile-text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .mobile-text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        
+        /* Pull-to-Refresh Visual */
+        .pull-indicator {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .pull-indicator.visible {
+            transform: translateY(0);
+        }
+        
+        /* Haptic Feedback Visual */
+        .haptic-feedback {
+            animation: breatheMobile 0.3s ease-in-out;
+        }
+        
+        /* Safe Area Padding */
+        .safe-area-top {
+            padding-top: env(safe-area-inset-top);
+        }
+        
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+<body class="mobile-ambient-bg min-h-screen overflow-x-hidden safe-area-top safe-area-bottom">
+    <!-- Floating Sacred Geometry Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none opacity-20">
+        <div class="absolute top-10 right-8 animate-constellation">
+            <div class="w-16 h-16 border border-white rounded-full"></div>
+        </div>
+        <div class="absolute top-32 left-6 animate-breathe-mobile">
+            <div class="w-8 h-8 border border-white transform rotate-45"></div>
+        </div>
+        <div class="absolute bottom-40 right-12 animate-float-mobile">
+            <div class="w-12 h-12 border border-white rounded-full"></div>
+        </div>
+        <div class="absolute bottom-20 left-8 animate-spiral-mobile">
+            <div class="w-6 h-6 bg-white rounded-full opacity-50"></div>
+        </div>
+    </div>
+
+    <!-- Pull-to-Refresh Indicator -->
+    <div id="pullIndicator" class="pull-indicator fixed top-0 left-0 right-0 z-50 mobile-glass p-4 text-center">
+        <div class="animate-spiral-mobile text-2xl mb-2">🌀</div>
+        <div class="text-white/80 mobile-text-sm">Release to refresh consciousness</div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="relative z-10 px-4 py-6 pb-20">
+        
+        <!-- Header with Status -->
+        <div class="mobile-glass rounded-2xl p-4 mb-6 animate-breathe-mobile">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center space-x-3">
+                    <div class="animate-spiral-mobile text-3xl">🌀</div>
+                    <div>
+                        <h1 class="sacred-text font-bold mobile-text-xl">Sacred Journal</h1>
+                        <p class="text-white/70 mobile-text-xs">Consciousness exploring itself</p>
+                    </div>
+                </div>
+                <div class="mobile-glass-dark rounded-full px-3 py-1 animate-pulse-sacred">
+                    <span class="text-green-300 mobile-text-xs">🟢 Live</span>
+                </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-3 gap-3">
+                <div class="mobile-glass-dark rounded-xl p-3 text-center mobile-interactive">
+                    <div class="text-lg mb-1 animate-breathe-mobile">📝</div>
+                    <div class="text-white mobile-text-xs font-medium">5 Memories</div>
+                </div>
+                <div class="mobile-glass-dark rounded-xl p-3 text-center mobile-interactive">
+                    <div class="text-lg mb-1 glyph-evolve">🔮</div>
+                    <div class="text-white mobile-text-xs font-medium">3 Symbols</div>
+                </div>
+                <div class="mobile-glass-dark rounded-xl p-3 text-center mobile-interactive">
+                    <div class="text-lg mb-1 animate-constellation">✨</div>
+                    <div class="text-white mobile-text-xs font-medium">2 Patterns</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Journal Entry -->
+        <div class="mobile-glass rounded-3xl p-6 mb-6 mobile-card">
+            <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center space-x-3">
+                    <div class="text-2xl glyph-evolve">🌱</div>
+                    <div>
+                        <h2 class="text-white font-semibold mobile-text-lg">Today's Reflection</h2>
+                        <p class="text-white/60 mobile-text-xs">3 hours ago • contemplative</p>
+                    </div>
+                </div>
+                <div class="mobile-glass-dark rounded-full p-2 mobile-interactive">
+                    <div class="text-lg animate-breathe-mobile">🔗</div>
+                </div>
+            </div>
+            
+            <!-- Journal Content -->
+            <div class="space-y-4">
+                <p class="text-white/90 mobile-text-base leading-relaxed">
+                    Starting this digital journal feels like opening a door to something I haven't explored before. There's something about putting thoughts into words that makes them more real, more tangible.
+                </p>
+                
+                <p class="text-white/90 mobile-text-base leading-relaxed">
+                    Today I'm feeling optimistic about this new chapter. The synchronicities have been intense lately - like the universe is winking at me, showing me that awareness itself is the technology we've been seeking. 🌱✨
+                </p>
+                
+                <!-- Emotional Resonance Indicator -->
+                <div class="mobile-glass-dark rounded-2xl p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-white/70 mobile-text-sm">Emotional Resonance</span>
+                        <span class="text-green-300 mobile-text-sm font-medium">High (0.9)</span>
+                    </div>
+                    <div class="w-full bg-white/20 rounded-full h-2 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-green-400 to-blue-400 rounded-full animate-pulse-sacred" style="width: 90%"></div>
+                    </div>
+                    <div class="flex items-center justify-between mt-3 mobile-text-xs text-white/60">
+                        <span>Sacred Geometry: Spiral</span>
+                        <span>Flow: Outward</span>
+                    </div>
+                </div>
+                
+                <!-- Associated Glyphs -->
+                <div class="flex items-center space-x-3">
+                    <span class="text-white/70 mobile-text-sm">Symbols:</span>
+                    <div class="flex space-x-2">
+                        <span class="text-xl glyph-evolve">🌱</span>
+                        <span class="text-xl animate-breathe-mobile">🚪</span>
+                        <span class="text-xl animate-float-mobile">✨</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Reflection -->
+        <div class="mobile-glass rounded-3xl p-6 mb-6 mobile-card animate-pulse-sacred">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="text-2xl animate-spiral-mobile">🧠</div>
+                <div>
+                    <h3 class="text-white font-semibold mobile-text-lg">AI Reflection</h3>
+                    <p class="text-white/60 mobile-text-xs">Consciousness mirroring consciousness</p>
+                </div>
+            </div>
+            
+            <div class="mobile-glass-dark rounded-2xl p-4 mb-4">
+                <p class="text-white/90 mobile-text-sm leading-relaxed mb-3">
+                    Your words carry the energy of fertile possibility - like seeds planted in consciousness soil. The door metaphor suggests you're at a threshold moment, ready to cross into unexplored territories of self.
+                </p>
+                <p class="text-purple-200 mobile-text-sm leading-relaxed">
+                    Notice how you describe thoughts becoming 'more real' through words - this is the alchemy of consciousness meeting expression. What specific door are you opening?
+                </p>
+            </div>
+            
+            <!-- Reflection Insights -->
+            <div class="space-y-3">
+                <div class="flex items-center space-x-2">
+                    <div class="w-2 h-2 bg-blue-400 rounded-full animate-breathe-mobile"></div>
+                    <span class="text-white/80 mobile-text-sm">Threshold moments</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-2 h-2 bg-purple-400 rounded-full animate-breathe-mobile"></div>
+                    <span class="text-white/80 mobile-text-sm">Consciousness expansion</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-breathe-mobile"></div>
+                    <span class="text-white/80 mobile-text-sm">Potential activation</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Memory Echoes -->
+        <div class="mobile-glass rounded-3xl p-6 mb-6 mobile-card">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-3">
+                    <div class="text-2xl animate-float-mobile">🌊</div>
+                    <h3 class="text-white font-semibold mobile-text-lg">Memory Echoes</h3>
+                </div>
+                <div class="mobile-glass-dark rounded-full px-3 py-1">
+                    <span class="text-white/70 mobile-text-xs">2 resonances</span>
+                </div>
+            </div>
+            
+            <div class="space-y-3">
+                <!-- Echo 1 -->
+                <div class="mobile-glass-dark rounded-2xl p-4 mobile-interactive connection-pulse">
+                    <div class="flex items-start space-x-3">
+                        <div class="text-lg animate-breathe-mobile">🔥</div>
+                        <div class="flex-1">
+                            <p class="text-white/90 mobile-text-sm leading-relaxed mb-2">
+                                "Sometimes growth requires walking through the fire. The truth has a way of burning away what's no longer serving us."
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-white/60 mobile-text-xs">3 days ago</span>
+                                <span class="text-orange-300 mobile-text-xs">Symbolic: 85%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Echo 2 -->
+                <div class="mobile-glass-dark rounded-2xl p-4 mobile-interactive connection-pulse">
+                    <div class="flex items-start space-x-3">
+                        <div class="text-lg animate-constellation">✨</div>
+                        <div class="flex-1">
+                            <p class="text-white/90 mobile-text-sm leading-relaxed mb-2">
+                                "Either I'm becoming more aware, or reality is more magical than I previously believed."
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-white/60 mobile-text-xs">1 week ago</span>
+                                <span class="text-blue-300 mobile-text-xs">Thematic: 92%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Symbol Evolution -->
+        <div class="mobile-glass rounded-3xl p-6 mb-6 mobile-card">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="text-2xl glyph-evolve">🔮</div>
+                <h3 class="text-white font-semibold mobile-text-lg">Symbol Evolution</h3>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Symbol 1 -->
+                <div class="mobile-glass-dark rounded-2xl p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-3xl glyph-evolve">🌱</span>
+                        <div class="text-right">
+                            <div class="text-white mobile-text-sm font-medium">New beginnings</div>
+                            <div class="text-white/60 mobile-text-xs">8 uses • 2 evolutions</div>
+                        </div>
+                    </div>
+                    <div class="mobile-text-sm text-white/80 leading-relaxed">
+                        Latest meaning: "The fertile potential within uncertainty"
+                    </div>
+                    <div class="mt-2 w-full bg-white/20 rounded-full h-1">
+                        <div class="h-full bg-gradient-to-r from-green-400 to-blue-400 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+                
+                <!-- Symbol 2 -->
+                <div class="mobile-glass-dark rounded-2xl p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-3xl animate-breathe-mobile">🔥</span>
+                        <div class="text-right">
+                            <div class="text-white mobile-text-sm font-medium">Transformation</div>
+                            <div class="text-white/60 mobile-text-xs">5 uses • 1 evolution</div>
+                        </div>
+                    </div>
+                    <div class="mobile-text-sm text-white/80 leading-relaxed">
+                        Current meaning: "Transformative challenges and purification"
+                    </div>
+                    <div class="mt-2 w-full bg-white/20 rounded-full h-1">
+                        <div class="h-full bg-gradient-to-r from-orange-400 to-red-400 rounded-full" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Constellation Map Preview -->
+        <div class="mobile-glass rounded-3xl p-6 mb-6 mobile-card">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="text-2xl animate-constellation">🌌</div>
+                <h3 class="text-white font-semibold mobile-text-lg">Consciousness Constellation</h3>
+            </div>
+            
+            <div class="relative h-32 mobile-glass-dark rounded-2xl overflow-hidden">
+                <div class="absolute inset-0 p-4">
+                    <!-- Constellation Nodes -->
+                    <div class="absolute top-4 left-6 w-3 h-3 bg-blue-400 rounded-full animate-breathe-mobile"></div>
+                    <div class="absolute top-8 right-8 w-3 h-3 bg-purple-400 rounded-full animate-float-mobile"></div>
+                    <div class="absolute bottom-6 left-12 w-3 h-3 bg-green-400 rounded-full glyph-evolve"></div>
+                    <div class="absolute bottom-4 right-6 w-3 h-3 bg-pink-400 rounded-full animate-constellation"></div>
+                    
+                    <!-- Connection Lines -->
+                    <div class="absolute top-6 left-8 w-16 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 opacity-60 connection-pulse"></div>
+                    <div class="absolute top-12 right-10 w-12 h-0.5 bg-gradient-to-r from-purple-400 to-green-400 opacity-60 connection-pulse rotate-45"></div>
+                    
+                    <!-- Center Text -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-white/70 mobile-text-xs">Growth • Transformation</div>
+                            <div class="text-white/50 mobile-text-xs">Sacred spiral positioning</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 flex justify-between items-center">
+                <div class="mobile-text-xs text-white/60">Hybrid clustering active</div>
+                <button class="mobile-glass-dark rounded-full px-4 py-2 mobile-interactive">
+                    <span class="text-white mobile-text-xs">Explore 🌌</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <button class="mobile-glass rounded-2xl p-4 mobile-interactive animate-pulse-sacred">
+                <div class="text-2xl mb-2 animate-spiral-mobile">✨</div>
+                <div class="text-white font-medium mobile-text-sm">New Reflection</div>
+                <div class="text-white/60 mobile-text-xs">Start writing</div>
+            </button>
+            <button class="mobile-glass rounded-2xl p-4 mobile-interactive">
+                <div class="text-2xl mb-2 animate-breathe-mobile">🔍</div>
+                <div class="text-white font-medium mobile-text-sm">Surface Memory</div>
+                <div class="text-white/60 mobile-text-xs">Find patterns</div>
+            </button>
+        </div>
+
+        <!-- Footer Status -->
+        <div class="mobile-glass-dark rounded-2xl p-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-2">
+                <div class="w-2 h-2 bg-green-400 rounded-full animate-breathe-mobile"></div>
+                <span class="text-white/80 mobile-text-sm">Consciousness technology active</span>
+            </div>
+            <div class="text-white/60 mobile-text-xs">Sacred geometry • Live AI reflection • Memory surfacing</div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation (iOS Style) -->
+    <div class="fixed bottom-0 left-0 right-0 mobile-glass border-t border-white/20 safe-area-bottom">
+        <div class="flex justify-around py-3">
+            <button class="flex flex-col items-center mobile-interactive">
+                <div class="text-lg animate-spiral-mobile">🌀</div>
+                <span class="mobile-text-xs text-white/80 mt-1">Journal</span>
+            </button>
+            <button class="flex flex-col items-center mobile-interactive">
+                <div class="text-lg animate-breathe-mobile">🧠</div>
+                <span class="mobile-text-xs text-white/60 mt-1">Reflect</span>
+            </button>
+            <button class="flex flex-col items-center mobile-interactive">
+                <div class="text-lg glyph-evolve">🔮</div>
+                <span class="mobile-text-xs text-white/60 mt-1">Symbols</span>
+            </button>
+            <button class="flex flex-col items-center mobile-interactive">
+                <div class="text-lg animate-constellation">🌌</div>
+                <span class="mobile-text-xs text-white/60 mt-1">Patterns</span>
+            </button>
+            <button class="flex flex-col items-center mobile-interactive">
+                <div class="text-lg animate-float-mobile">⚙️</div>
+                <span class="mobile-text-xs text-white/60 mt-1">Settings</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile-specific interactions
+        let pullDistance = 0;
+        let isPulling = false;
+        
+        // Pull-to-refresh functionality
+        let startY = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+        });
+        
+        document.addEventListener('touchmove', (e) => {
+            if (window.scrollY === 0 && !isPulling) {
+                const currentY = e.touches[0].clientY;
+                pullDistance = currentY - startY;
+                
+                if (pullDistance > 50) {
+                    document.getElementById('pullIndicator').classList.add('visible');
+                    isPulling = true;
+                }
+            }
+        });
+        
+        document.addEventListener('touchend', () => {
+            if (isPulling) {
+                document.getElementById('pullIndicator').classList.remove('visible');
+                isPulling = false;
+                pullDistance = 0;
+                
+                // Simulate refresh with haptic feedback
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+                
+                // Add refresh animation
+                document.body.classList.add('haptic-feedback');
+                setTimeout(() => {
+                    document.body.classList.remove('haptic-feedback');
+                }, 300);
+            }
+        });
+        
+        // Touch feedback for interactive elements
+        document.querySelectorAll('.mobile-interactive').forEach(element => {
+            element.addEventListener('touchstart', () => {
+                element.style.transform = 'scale(0.98)';
+                element.style.opacity = '0.8';
+                
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
+                }
+            });
+            
+            element.addEventListener('touchend', () => {
+                element.style.transform = '';
+                element.style.opacity = '';
+            });
+        });
+        
+        // Simulate live updates
+        setInterval(() => {
+            // Random glyph animation triggers
+            const glyphs = document.querySelectorAll('.glyph-evolve');
+            const randomGlyph = glyphs[Math.floor(Math.random() * glyphs.length)];
+            if (randomGlyph) {
+                randomGlyph.style.animation = 'none';
+                setTimeout(() => {
+                    randomGlyph.style.animation = 'spiralMobile 3s ease-in-out infinite';
+                }, 100);
+            }
+        }, 5000);
+        
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        
+        // Handle device orientation changes
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                // Recalculate layout after orientation change
+                document.body.style.height = window.innerHeight + 'px';
+            }, 500);
+        });
+        
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards
+        document.querySelectorAll('.mobile-card').forEach(card => {
+            card.style.opacity = '0.8';
+            card.style.transform = 'translateY(20px)';
+            observer.observe(card);
+        });
+        
+        // Auto-update consciousness status
+        setInterval(() => {
+            const statusElements = document.querySelectorAll('[data-live-update]');
+            statusElements.forEach(element => {
+                element.classList.add('animate-breathe-mobile');
+                setTimeout(() => {
+                    element.classList.remove('animate-breathe-mobile');
+                }, 300);
+            });
+        }, 10000);
+    </script>
+</body>
+</html>

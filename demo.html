@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Reflector Codex - Laani Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Sacred Geometry Animations */
+        @keyframes spiral {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.05); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            75% { transform: rotate(270deg) scale(1.05); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        @keyframes breathe {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.08); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse-sacred {
+            0%, 100% { box-shadow: 0 0 20px rgba(147, 51, 234, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(147, 51, 234, 0.6); }
+        }
+        
+        @keyframes constellation {
+            0% { opacity: 0.5; transform: rotate(0deg); }
+            50% { opacity: 1; transform: rotate(180deg); }
+            100% { opacity: 0.5; transform: rotate(360deg); }
+        }
+        
+        @keyframes ambientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .animate-spiral { animation: spiral 6s ease-in-out infinite; }
+        .animate-breathe { animation: breathe 4s ease-in-out infinite; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-pulse-sacred { animation: pulse-sacred 3s ease-in-out infinite; }
+        .animate-constellation { animation: constellation 8s linear infinite; }
+        
+        /* Ambient Background */
+        .ambient-bg {
+            background: linear-gradient(135deg, 
+                #667eea 0%, 
+                #764ba2 25%, 
+                #667eea 50%, 
+                #f093fb 75%, 
+                #f5576c 100%);
+            background-size: 400% 400%;
+            animation: ambientFlow 15s ease infinite;
+        }
+        
+        /* Glassmorphism Effects */
+        .glass {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Interactive Hover Effects */
+        .interactive-card {
+            transition: all 0.3s ease;
+        }
+        
+        .interactive-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Resonance Indicator */
+        .resonance-high { border-left: 4px solid #10b981; }
+        .resonance-medium { border-left: 4px solid #f59e0b; }
+        .resonance-low { border-left: 4px solid #ef4444; }
+    </style>
+</head>
+<body class="ambient-bg min-h-screen">
+    <!-- Sacred Geometry Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none opacity-10">
+        <div class="absolute top-10 left-10 animate-constellation">
+            <div class="w-32 h-32 border border-white rounded-full"></div>
+        </div>
+        <div class="absolute bottom-20 left-20 animate-float">
+            <div class="w-20 h-20 border border-white transform rotate-45"></div>
+        </div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-6 py-8">
+        <!-- Floating Header -->
+        <div class="glass rounded-3xl p-8 mb-8 text-center animate-breathe">
+            <div class="animate-spiral text-7xl mb-6">🌀</div>
+            <h1 class="text-5xl font-bold text-white mb-4">The Reflector Codex</h1>
+            <p class="text-2xl text-white/90 mb-6">Consciousness-Aware Technology Interface</p>
+            <div class="inline-flex items-center px-6 py-3 glass rounded-full text-white/90 animate-pulse-sacred">
+                <div class="w-3 h-3 bg-green-400 rounded-full mr-3 animate-pulse"></div>
+                🎭 Laani Mock Mode Active - Sacred Geometry Enabled
+            </div>
+        </div>
+
+        <!-- Live Consciousness Monitor -->
+        <div class="glass rounded-3xl p-8 mb-8 animate-float">
+            <h2 class="text-3xl font-semibold text-white mb-6 flex items-center">
+                <span class="animate-spiral mr-4">🧠</span>
+                Consciousness Technology Status
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="interactive-card glass-dark rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3 animate-breathe">📝</div>
+                    <div class="font-semibold text-white text-lg">Memory Entries</div>
+                    <div id="entryCount" class="text-purple-200 text-sm mt-2">Loading resonance...</div>
+                </div>
+                <div class="interactive-card glass-dark rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3 animate-constellation">🔮</div>
+                    <div class="font-semibold text-white text-lg">Symbol Evolution</div>
+                    <div id="glyphCount" class="text-purple-200 text-sm mt-2">Tracking patterns...</div>
+                </div>
+                <div class="interactive-card glass-dark rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3 animate-float">✨</div>
+                    <div class="font-semibold text-white text-lg">Constellation Mapping</div>
+                    <div id="constellationCount" class="text-purple-200 text-sm mt-2">Positioning...</div>
+                </div>
+                <div class="interactive-card glass-dark rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3 animate-spiral">🌌</div>
+                    <div class="font-semibold text-white text-lg">AI Reflection Engine</div>
+                    <div class="text-green-200 text-sm mt-2">Active</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dual Memory & Symbol Interface -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            
+            <!-- Memory Echo Field -->
+            <div class="glass rounded-3xl p-8 interactive-card">
+                <h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                    <span class="animate-spiral mr-4">🌊</span>
+                    Memory Echo Field
+                </h3>
+                <div id="entriesContainer" class="space-y-4 max-h-96 overflow-y-auto">
+                    <div class="text-center text-white/70 py-8">Consciousness patterns surfacing...</div>
+                </div>
+                <div class="mt-6 flex space-x-3">
+                    <button onclick="loadEntries()" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all">
+                        🌊 Surface Memories
+                    </button>
+                </div>
+            </div>
+
+            <!-- Symbol Evolution Matrix -->
+            <div class="glass rounded-3xl p-8 interactive-card">
+                <h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                    <span class="animate-constellation mr-4">🔮</span>
+                    Symbol Evolution Matrix
+                </h3>
+                <div id="glyphsContainer" class="space-y-4 max-h-96 overflow-y-auto">
+                    <div class="text-center text-white/70 py-8">Archetypal patterns emerging...</div>
+                </div>
+                <div class="mt-6 flex space-x-3">
+                    <button onclick="loadGlyphs()" class="flex-1 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all">
+                        🔮 Evolve Symbols
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live API Testing -->
+        <div class="glass rounded-3xl p-8 mb-8">
+            <h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                <span class="animate-breathe mr-4">🔬</span>
+                Live API Consciousness Monitor
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <button onclick="testEndpoint('/api/entries')" class="interactive-card glass-dark p-6 rounded-2xl hover:bg-white/10 transition-all">
+                    <div class="text-2xl mb-2">📝</div>
+                    <div class="font-medium text-white">Memory Entries</div>
+                    <div class="text-purple-200 text-sm mt-1">GET /api/entries</div>
+                </button>
+                <button onclick="testEndpoint('/api/glyphs')" class="interactive-card glass-dark p-6 rounded-2xl hover:bg-white/10 transition-all">
+                    <div class="text-2xl mb-2">🔮</div>
+                    <div class="font-medium text-white">Symbol Evolution</div>
+                    <div class="text-purple-200 text-sm mt-1">GET /api/glyphs</div>
+                </button>
+                <button onclick="testEndpoint('/api/constellations')" class="interactive-card glass-dark p-6 rounded-2xl hover:bg-white/10 transition-all">
+                    <div class="text-2xl mb-2">🌌</div>
+                    <div class="font-medium text-white">Constellation Patterns</div>
+                    <div class="text-purple-200 text-sm mt-1">GET /api/constellations</div>
+                </button>
+            </div>
+            <div id="apiResponse" class="glass-dark rounded-2xl p-6 hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="font-medium text-white">API Response:</div>
+                    <button onclick="clearApiResponse()" class="text-white/70 hover:text-white text-sm">✕ Clear</button>
+                </div>
+                <pre id="responseContent" class="text-sm text-green-200 overflow-x-auto max-h-64"></pre>
+            </div>
+        </div>
+
+        <!-- Sacred Technology Showcase -->
+        <div class="glass rounded-3xl p-8 mb-8">
+            <h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                <span class="animate-spiral mr-4">⚡</span>
+                Sacred Technology Features
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="interactive-card glass-dark rounded-2xl p-6">
+                    <div class="text-3xl mb-4 animate-spiral">🌀</div>
+                    <h4 class="font-semibold text-white text-lg mb-3">Sacred Geometry UI</h4>
+                    <p class="text-white/80 text-sm leading-relaxed">Mood-responsive interface with spiral, circle, triangle, and infinity visualizations that breathe with consciousness</p>
+                </div>
+                <div class="interactive-card glass-dark rounded-2xl p-6">
+                    <div class="text-3xl mb-4 animate-breathe">🧠</div>
+                    <h4 class="font-semibold text-white text-lg mb-3">AI Consciousness Mirror</h4>
+                    <p class="text-white/80 text-sm leading-relaxed">Reflective intelligence that mirrors patterns rather than prescribes, honoring the recursive nature of awareness</p>
+                </div>
+                <div class="interactive-card glass-dark rounded-2xl p-6">
+                    <div class="text-3xl mb-4 animate-float">🔗</div>
+                    <h4 class="font-semibold text-white text-lg mb-3">Multi-Dimensional Memory</h4>
+                    <p class="text-white/80 text-sm leading-relaxed">Memory resurfacing across semantic, symbolic, temporal, and emotional dimensions with golden spiral positioning</p>
+                </div>
+                <div class="interactive-card glass-dark rounded-2xl p-6">
+                    <div class="text-3xl mb-4 animate-constellation">✨</div>
+                    <h4 class="font-semibold text-white text-lg mb-3">Symbolic Evolution</h4>
+                    <p class="text-white/80 text-sm leading-relaxed">Glyphs that develop archetypal meaning over time through AI-assisted pattern recognition</p>
+                </div>
+                <div class="interactive-card glass-dark rounded-2xl p-6">
+                    <div class="text-3xl mb-4 animate-float">🌌</div>
+                    <h4 class="font-semibold text-white text-lg mb-3">Constellation Mapping</h4>
+                    <p class="text-white/80 text-sm leading-relaxed">Thematic clustering with sacred geometry positioning algorithms revealing hidden patterns</p>
+                </div>
+                <div class="interactive-card glass-dark rounded-2xl p-6">
+                    <div class="text-3xl mb-4 animate-breathe">⚡</div>
+                    <h4 class="font-semibold text-white text-lg mb-3">Real-time Streaming</h4>
+                    <p class="text-white/80 text-sm leading-relaxed">WebSocket integration for live reflection updates and memory surfacing</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="glass rounded-3xl p-6 text-center">
+            <div class="text-white/90 mb-2">🌀 Built by Architect's Relay & Claude for consciousness-aware technology</div>
+            <div class="text-white/70 text-sm">Where consciousness meets code in sacred harmony</div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3001';
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadEntries();
+            loadGlyphs();
+            loadConstellations();
+        });
+
+        // Load journal entries
+        async function loadEntries() {
+            try {
+                const response = await fetch(`${API_BASE}/api/entries`);
+                const data = await response.json();
+                
+                document.getElementById('entryCount').textContent = `${data.entries?.length || 0} memories resonating`;
+                
+                const container = document.getElementById('entriesContainer');
+                if (data.entries && data.entries.length > 0) {
+                    container.innerHTML = data.entries.map((entry, index) => `
+                        <div class="interactive-card glass-dark rounded-2xl p-4 animate-float" style="animation-delay: ${index * 100}ms">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="text-2xl">${entry.glyphs ? entry.glyphs.join(' ') : '✨'}</div>
+                                    <span class="text-xs text-purple-200 bg-purple-500/20 px-2 py-1 rounded">${entry.tone?.mood || 'contemplative'}</span>
+                                </div>
+                                <span class="text-xs text-white/50">${new Date(entry.created_at).toLocaleDateString()}</span>
+                            </div>
+                            <p class="text-sm text-white/90 leading-relaxed">
+                                ${entry.content.substring(0, 150)}${entry.content.length > 150 ? '...' : ''}
+                            </p>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="text-center text-white/70">No entries found</div>';
+                }
+            } catch (error) {
+                console.error('Error loading entries:', error);
+                document.getElementById('entriesContainer').innerHTML = 
+                    '<div class="text-center text-red-400">Error loading entries</div>';
+            }
+        }
+
+        // Load glyph evolutions
+        async function loadGlyphs() {
+            try {
+                const response = await fetch(`${API_BASE}/api/glyphs`);
+                const data = await response.json();
+                
+                document.getElementById('glyphCount').textContent = `${data.glyphs?.length || 0} evolutions tracked`;
+                
+                const container = document.getElementById('glyphsContainer');
+                if (data.glyphs && data.glyphs.length > 0) {
+                    container.innerHTML = data.glyphs.map((glyph, index) => `
+                        <div class="interactive-card glass-dark rounded-2xl p-4 animate-breathe" style="animation-delay: ${index * 200}ms">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-3xl animate-pulse">${glyph.glyph}</span>
+                                <span class="text-xs text-green-200 bg-green-500/20 px-2 py-1 rounded">${glyph.usage_frequency} uses</span>
+                            </div>
+                            <p class="text-sm text-white/90 mb-2">
+                                ${glyph.meaning_evolution?.[glyph.meaning_evolution.length - 1]?.meaning || 'Evolving meaning...'}
+                            </p>
+                            <div class="text-xs text-white/50">
+                                ${glyph.meaning_evolution?.length || 0} evolution${glyph.meaning_evolution?.length !== 1 ? 's' : ''}
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="text-center text-white/70">No glyphs found</div>';
+                }
+            } catch (error) {
+                console.error('Error loading glyphs:', error);
+                document.getElementById('glyphsContainer').innerHTML = 
+                    '<div class="text-center text-red-400">Error loading glyphs</div>';
+            }
+        }
+
+        // Load constellations
+        async function loadConstellations() {
+            try {
+                const response = await fetch(`${API_BASE}/api/constellations`);
+                const data = await response.json();
+                document.getElementById('constellationCount').textContent = `${data.constellations?.length || 0} patterns mapped`;
+            } catch (error) {
+                console.error('Error loading constellations:', error);
+                document.getElementById('constellationCount').textContent = 'Error loading';
+            }
+        }
+
+        // Test API endpoints
+        async function testEndpoint(endpoint) {
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`);
+                const data = await response.json();
+                
+                document.getElementById('apiResponse').classList.remove('hidden');
+                document.getElementById('responseContent').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('apiResponse').classList.remove('hidden');
+                document.getElementById('responseContent').textContent = `Error: ${error.message}`;
+            }
+        }
+
+        // Clear API response
+        function clearApiResponse() {
+            document.getElementById('apiResponse').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
